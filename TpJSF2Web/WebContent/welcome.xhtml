@@ -1,0 +1,150 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	template="/layout/simpleLayout.xhtml">
+
+	<ui:define name="header">
+		<h:graphicImage styleClass="logo" value="resources/img/logo.png"
+			height="70" />
+		<h:outputText
+			value="Application d'administration de comptes utilisateurs" />
+	</ui:define>
+
+	<ui:define name="content">
+		<rich:tabPanel>
+			<rich:tab header="Utilisateurs">
+				<h:panelGrid columns="2">
+					<h:panelGroup>
+						<!-- Liste -->
+						<rich:panel header="Liste des utilisateurs" id="ajaxBlocUtilisateurList">
+							<rich:dataTable var="utilisateur" value="#{utilisateursAction.utilisateurs}">
+								<rich:column>
+									<f:facet name="header">Login</f:facet>
+									<h:outputText value="#{utilisateur.login}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header">Groupes</f:facet>
+									<c:forEach var="i" items="#{utilisateur.groupes}">
+										<h:outputText value="#{i.nom}" />
+									</c:forEach>			
+								</rich:column>
+								<rich:column>
+									<h:commandLink action="#{utilisateursAction.edit(utilisateur.login)}">
+										<h:graphicImage styleClass="logo"
+											value="resources/img/edit.png" />
+										<a4j:ajax execute="@this" render="ajaxBlocGroupeEdition" />
+									</h:commandLink>
+								</rich:column>
+							</rich:dataTable>
+						</rich:panel>
+						<br />
+						<h:commandLink value="Ajouter un utilisateur" />
+					</h:panelGroup>
+					<h:panelGroup>
+						<!-- Edition -->
+						<a4j:outputPanel id="ajaxBlocGroupeEdition">
+							<rich:panel header="Edition d'un utilisateur"
+								rendered="#{not empty utilisateursAction.utilisateurEnEdition}">
+								<h:panelGrid columns="2">
+									<h:outputLabel value="Login" for="utilisateurLogin" />
+									<h:panelGrid columns="1">
+										<h:inputText value="#{utilisateursAction.utilisateurEnEdition.login}"
+											id="utilisateurLogin">
+											<f:validateRequired />
+											<f:validateLength minimum="3" maximum="42" />
+										</h:inputText>
+									</h:panelGrid>
+
+									
+								<h:panelGrid columns="2" styleClass="actionFooter">
+								<h:commandButton value="Valider"
+									action="#{utilisateursAction.validerEdition()}">
+									<a4j:ajax execute="ajaxBlocGroupeEdition"
+										render="ajaxBlocGroupeEdition ajaxBlocGroupeList ajaxGlobalMessages" />
+								</h:commandButton>
+								<h:commandButton value="Annuler"
+									action="#{utilisateursAction.annulerEdition()}" />
+								</h:panelGrid>
+							</rich:panel>
+						</a4j:outputPanel>
+					</h:panelGroup>
+				</h:panelGrid>
+			</rich:tab>
+
+			<rich:tab header="Groupes">
+				<h:panelGrid columns="2">
+					<h:panelGroup>
+						<!-- Liste -->
+						<rich:panel header="Liste des groupes" id="ajaxBlocGroupeList">
+							<rich:dataTable var="groupe" value="#{groupesAction.groupes}">
+								<rich:column>
+									<f:facet name="header">Nom</f:facet>
+									<h:outputText value="#{groupe.nom}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header">Description</f:facet>
+									<h:outputText value="#{groupe.description}" />
+								</rich:column>
+								<rich:column>
+									<h:commandLink action="#{groupesAction.edit(groupe.id)}">
+										<h:graphicImage styleClass="logo"
+											value="resources/img/edit.png" />
+										<a4j:ajax execute="@this" render="ajaxBlocGroupeEdition" />
+									</h:commandLink>
+								</rich:column>
+							</rich:dataTable>
+						</rich:panel>
+						<br />
+						<h:commandLink value="Ajouter un groupe" />
+					</h:panelGroup>
+					<h:panelGroup>
+						<!-- Edition -->
+						<a4j:outputPanel id="ajaxBlocGroupeEdition">
+							<rich:panel header="Edition d'un groupe"
+								rendered="#{not empty groupesAction.groupeEnEdition}">
+								<h:panelGrid columns="2">
+									<h:outputLabel value="Nom" for="groupeNom" />
+									<h:panelGrid columns="1">
+										<h:inputText value="#{groupesAction.groupeEnEdition.nom}"
+											id="groupeNom">
+											<f:validateRequired />
+											<f:validateLength minimum="3" maximum="42" />
+										</h:inputText>
+									</h:panelGrid>
+
+									<h:outputLabel value="Description" for="groupeDescription" />
+									<h:panelGrid columns="1">
+										<h:inputTextarea required="true"
+											requiredMessage="La description est obligatoire"
+											value="#{groupesAction.groupeEnEdition.description}"
+											id="groupeDescription" />
+										<h:message styleClass="errorMsg" for="groupeDescription" />
+									</h:panelGrid>
+								</h:panelGrid>
+								<h:panelGrid columns="2" styleClass="actionFooter">
+								<h:commandButton value="Valider"
+									action="#{groupesAction.validerEdition()}">
+									<a4j:ajax execute="ajaxBlocGroupeEdition"
+										render="ajaxBlocGroupeEdition ajaxBlocGroupeList ajaxGlobalMessages" />
+								</h:commandButton>
+								<h:commandButton value="Annuler"
+									action="#{groupesAction.annulerEdition()}" />
+								</h:panelGrid>
+							</rich:panel>
+						</a4j:outputPanel>
+					</h:panelGroup>
+				</h:panelGrid>
+			</rich:tab>
+		</rich:tabPanel>
+
+	</ui:define>
+
+	<ui:define name="footer">
+		<h:outputText value="TP 5 - JSF 2 et CDI" />
+	</ui:define>
+
+</ui:composition>

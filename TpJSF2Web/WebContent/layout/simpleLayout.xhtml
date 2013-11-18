@@ -1,0 +1,40 @@
+﻿<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:insert name="metadata"/>
+<h:head>
+	<title>
+	   <ui:insert name="windowTitle">Administration des comptes utilisateurs</ui:insert>
+	</title>
+</h:head>
+<h:body>
+    <h:outputStylesheet library="css" name="style.css" />
+    <h:form>
+	    <a4j:status startStyleClass="ajaxIndicateur">
+	    	<f:facet name="start" >
+	    		<h:graphicImage value="resources/img/loading.gif" alt="Chargement en cours" />
+	    	</f:facet>
+	    </a4j:status>
+
+       <h:panelGroup styleClass="header" layout="block">
+           <ui:insert name="header" />
+       </h:panelGroup>
+       <h:panelGroup styleClass="content" layout="block">
+       	    <a4j:outputPanel id="ajaxGlobalMessages">
+	    	    <h:messages globalOnly="true" errorClass="globalErrors" infoClass="globalInfos" />
+	   		</a4j:outputPanel>
+
+           <ui:insert name="content" />
+       </h:panelGroup>
+
+       <h:panelGroup styleClass="footer" layout="block">
+           <ui:insert name="footer" />
+       </h:panelGroup>
+   </h:form>
+</h:body>
+</html>
