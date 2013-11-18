@@ -21,19 +21,24 @@ public class UtilisateurServiceDelegateMock implements UtilisateursServiceDelega
 	 */
 	private static final long serialVersionUID = 2251361121918457349L;
 
-	List<Utilisateur> utilisateurs;
+	List<Utilisateur> utilisateurs = new ArrayList<Utilisateur>();
 
 	private int identifiant = 0;
 	
-	@Inject
-	GroupeServiceDelegateMock groupeServiceDelegateMock;
 
 	@PostConstruct
 	public void init() {
 		Utilisateur u = new Utilisateur();
 		u.setLogin("fioren_b");
 		u.setPassword("xes");
-		u.setGroupes(groupeServiceDelegateMock.listerTousGroupes());
+		Groupe g = new Groupe();
+		g.setDescription("admins du lab");
+		g.setId(42);
+		g.setNom("admins");
+		List<Groupe> list = new ArrayList<Groupe>();
+		list.add(g);
+		u.setGroupes(list);
+		utilisateurs.add(u);
 	}
 
 	public UtilisateurServiceDelegateMock() {

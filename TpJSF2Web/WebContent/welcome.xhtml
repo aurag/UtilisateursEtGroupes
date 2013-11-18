@@ -16,7 +16,7 @@
 
 	<ui:define name="content">
 		<rich:tabPanel>
-			<rich:tab header="Utilisateurs">
+					<rich:tab header="Utilisateurs">
 				<h:panelGrid columns="2">
 					<h:panelGroup>
 						<!-- Liste -->
@@ -36,7 +36,7 @@
 									<h:commandLink action="#{utilisateursAction.edit(utilisateur.login)}">
 										<h:graphicImage styleClass="logo"
 											value="resources/img/edit.png" />
-										<a4j:ajax execute="@this" render="ajaxBlocGroupeEdition" />
+										<a4j:ajax execute="@this" render="ajaxBlocUtilisateurEdition" />
 									</h:commandLink>
 								</rich:column>
 							</rich:dataTable>
@@ -46,7 +46,7 @@
 					</h:panelGroup>
 					<h:panelGroup>
 						<!-- Edition -->
-						<a4j:outputPanel id="ajaxBlocGroupeEdition">
+						<a4j:outputPanel id="ajaxBlocUtilisateurEdition">
 							<rich:panel header="Edition d'un utilisateur"
 								rendered="#{not empty utilisateursAction.utilisateurEnEdition}">
 								<h:panelGrid columns="2">
@@ -60,21 +60,21 @@
 									</h:panelGrid>
 
 									
-								<h:panelGrid columns="2" styleClass="actionFooter">
-								<h:commandButton value="Valider"
-									action="#{utilisateursAction.validerEdition()}">
-									<a4j:ajax execute="ajaxBlocGroupeEdition"
-										render="ajaxBlocGroupeEdition ajaxBlocGroupeList ajaxGlobalMessages" />
-								</h:commandButton>
-								<h:commandButton value="Annuler"
-									action="#{utilisateursAction.annulerEdition()}" />
+									<h:panelGrid columns="2" styleClass="actionFooter">
+										<h:commandButton value="Valider"
+											action="#{utilisateursAction.validerEdition()}">
+											<a4j:ajax execute="ajaxBlocUtilisateurEdition"
+												render="ajaxBlocUtilisateurEdition ajaxBlocEditeurList ajaxGlobalMessages" />
+										</h:commandButton>
+										<h:commandButton value="Annuler"
+											action="#{utilisateursAction.annulerEdition()}" />
+									</h:panelGrid>
 								</h:panelGrid>
 							</rich:panel>
 						</a4j:outputPanel>
 					</h:panelGroup>
 				</h:panelGrid>
 			</rich:tab>
-
 			<rich:tab header="Groupes">
 				<h:panelGrid columns="2">
 					<h:panelGroup>

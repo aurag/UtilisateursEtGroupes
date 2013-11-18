@@ -27,13 +27,21 @@ public class UtilisateursAction implements Serializable {
 	@Inject
 	private UtilisateursServiceDelegate service;
 
+	public List<Utilisateur> getUtilisateurs() {
+		return utilisateurs;
+	}
+
+	public void setUtilisateurs(List<Utilisateur> utilisateurs) {
+		this.utilisateurs = utilisateurs;
+	}
+
 	/**
 	 * Liste d'utilisateurs pour l'IHM
 	 */
 	private List<Utilisateur> utilisateurs;
 
 	private static final Logger LOGGER = Logger.getLogger(UtilisateursAction.class.getName());
-	private Utilisateur utilisateurEnEdition; 
+	private Utilisateur utilisateurEnEdition = null; 
 
 
 	public Utilisateur getUtilisateurEnEdition() {
