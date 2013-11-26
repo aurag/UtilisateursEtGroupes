@@ -71,9 +71,8 @@ public class UtilisateursAction implements Serializable {
 	public String validerEdition() {
 		try{
 			service.sauvegarderUtilisateur(utilisateurEnEdition);
-			utilisateurs= service.listerTousUtilisateurs();
 
-			String msg = "Groupe " + utilisateurEnEdition.getLogin() + " correctement mis à jour.";
+			String msg = "Utilisateur " + utilisateurEnEdition.getLogin() + " correctement mis à jour.";
 			utilisateurEnEdition = null;
 			FacesContext.getCurrentInstance().addMessage(null, 
 														 new FacesMessage(FacesMessage.SEVERITY_INFO, msg, msg));

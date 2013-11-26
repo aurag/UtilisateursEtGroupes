@@ -66,20 +66,20 @@ public class UtilisateurServiceDelegateMock implements UtilisateursServiceDelega
 		boolean inCreation = false;
 		Utilisateur utilisateurExistant = null;
 		Utilisateur utilisateurASauvegarder = null;
-		if (utilisateur.getLogin() != null) {
-			utilisateurExistant = retrouverUtilisateurParLogin(utilisateur.getLogin());
-			if (utilisateurExistant == null) {
-				throw new IllegalStateException ("Edition d'un groupe inexistant dans le bouch");
-			}
-			else
-				utilisateurASauvegarder = utilisateurExistant;
-		}
-		else {
+
+		utilisateurExistant = retrouverUtilisateurParLogin(utilisateur.getLogin());
+		if (utilisateurExistant == null) {
 			utilisateurASauvegarder = new Utilisateur();
+			inCreation = true;
 		}
-			utilisateurASauvegarder.setLogin(utilisateur.getLogin());
-			utilisateurASauvegarder.setPassword(utilisateur.getPassword());
-			utilisateurASauvegarder.setGroupes(utilisateur.getGroupes());
+		else
+			utilisateurASauvegarder = utilisateurExistant;
+
+
+		utilisateurASauvegarder.setLogin(utilisateur.getLogin());
+		utilisateurASauvegarder.setPassword(utilisateur.getPassword());
+		utilisateurASauvegarder.setGroupes(utilisateur.getGroupes());
+		
 		if (inCreation) {
 			utilisateurs.add(utilisateurASauvegarder);
 		}
