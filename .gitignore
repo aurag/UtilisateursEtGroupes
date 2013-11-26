@@ -4,3 +4,7 @@
 *.jar
 *.war
 *.ear
+*.settings
+.settings
+/TpJSF2Web/*.classpath
+/TpJSF2EJB/build
