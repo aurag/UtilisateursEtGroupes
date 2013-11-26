@@ -11,6 +11,7 @@ public class Groupe implements Serializable {
 	private Integer _id;
 	private String _nom;
 	private String _description;
+	
 	public Integer getId() {
 		return _id;
 	}

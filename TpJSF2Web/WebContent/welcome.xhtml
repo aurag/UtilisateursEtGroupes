@@ -16,7 +16,7 @@
 
 	<ui:define name="content">
 		<rich:tabPanel>
-					<rich:tab header="Utilisateurs">
+			<rich:tab header="Utilisateurs">
 				<h:panelGrid columns="2">
 					<h:panelGroup>
 						<!-- Liste -->
@@ -99,7 +99,9 @@
 							</rich:dataTable>
 						</rich:panel>
 						<br />
-						<h:commandLink value="Ajouter un groupe" />
+						<h:commandLink action="#{groupesAction.add()}" value="Ajouter un groupe" >
+							<a4j:ajax execute="@this" render="ajaxBlocGroupeEdition" />
+						</h:commandLink>
 					</h:panelGroup>
 					<h:panelGroup>
 						<!-- Edition -->

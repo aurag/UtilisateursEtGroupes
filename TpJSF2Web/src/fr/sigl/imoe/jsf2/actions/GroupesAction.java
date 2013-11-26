@@ -54,6 +54,12 @@ public class GroupesAction implements Serializable {
 	public List<Groupe> getGroupes() {
 		return groupes;        
 	}
+	
+	public String add() {
+		Groupe g = new Groupe();
+		setGroupeEnEdition(g);
+		return null;    
+	}
 
 	public String edit(Integer id) {
 		Groupe g = service.retrouverGroupeParId(id);
